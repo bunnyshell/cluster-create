@@ -37,7 +37,37 @@ Please note that running the cleanup script will irreversibly delete the GKE clu
 
 After running the script, your GKE cluster will be ready for action! The script will also provide you with essential information such as the Cloud Region, Cluster URL, Certificate, and Project ID.
 
+Absolutely, let's document that script so even future-you will know what's going on. Here's a README section:
 
-# TODO 
-- [ ] Add PVs storage classes
-- Apply load balancer 
+---
+
+## NFS Setup Script for GKE
+
+### Description
+
+This Bash script automates the process of setting up an NFS server on a Google Kubernetes Engine (GKE) cluster. It performs the following tasks:
+
+1. Checks if `gcloud`, `kubectl`, and `helm` CLI tools are installed.
+2. Informs you about the current `gcloud` profile you're operating under and asks for confirmation to proceed.
+3. Prompts for various parameters like cluster name, disk size, region, and zone.
+4. Creates a GCloud Disk with the specified parameters.
+5. Deploys an NFS server on the GKE cluster.
+6. Creates a ClusterIP service for the NFS server.
+7. Installs the `nfs-subdir-external-provisioner` Helm chart to manage NFS subdirectories.
+
+### Prerequisites
+
+- Google Cloud SDK (`gcloud`)
+- Kubernetes Command-Line Tool (`kubectl`)
+- Helm Package Manager (`helm`)
+
+### Usage
+
+1. **Download the Script**: Download `setup_nfs.sh` to your local machine.
+
+2. **Make it Executable**: Run `chmod +x setup_nfs.sh` to make the script executable.
+
+3. **Run the Script**: Execute the script by running `./setup_nfs.sh`.
+
+4. **Follow the Prompts**: The script will ask you to enter various parameters. Provide the required information when prompted.
+
