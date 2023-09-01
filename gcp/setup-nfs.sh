@@ -29,9 +29,9 @@ read -p "Disk type: " DISK_TYPE
 
 # Create GCloud Disk
 if [ -z "$ZONE" ]; then
-  gcloud compute disks create --size=${SIZE}GB --region=${REGION} nfs-gke-disk --labels=ORIGIN=gke-cluster-bns-${CLUSTER_NAME} --type=${DISK_TYPE}
+  gcloud compute disks create --size=${SIZE}GB --region=${REGION} nfs-gke-disk --labels=ORIGIN=gke-bns-${CLUSTER_NAME} --type=${DISK_TYPE}
 else
-  gcloud compute disks create --size=${SIZE}GB --region=${REGION} --zone=${ZONE} nfs-gke-disk --labels=ORIGIN=gke-cluster-bns-${CLUSTER_NAME} --type=${DISK_TYPE}
+  gcloud compute disks create --size=${SIZE}GB --region=${REGION} --zone=${ZONE} nfs-gke-disk --labels=ORIGIN=gke-bns-${CLUSTER_NAME} --type=${DISK_TYPE}
 fi
 
 # Create NFS Deployment YAML
