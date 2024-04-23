@@ -3,19 +3,19 @@
 # Enable strict mode
 set -euo pipefail
 
-echo "🐰 Checking kubectl and gcloud..."
-if command -v kubectl &>/dev/null && command -v gcloud &>/dev/null; then
-    echo "🐰 You're all set to conquer the cloud! 🌩️"
+echo ' Checking kubectl and gcloud...'
+if command -v kubectl >/dev/null 2>&1 && command -v gcloud >/dev/null 2>&1; then
+    echo 'checking prerequisites: OK'
 else
-    echo "🐰 Oops, looks like you're missing kubectl or gcloud. Time to gear up!"
+    echo 'checking prerequisites: missing kubectl or gcloud'
     exit 1
 fi
 
-echo "🐰 Checking gcloud project configuration..."
+echo '🐰 Checking gcloud project configuration...'
 project_id=$(gcloud config get-value project)
 
-echo "🐰 Setting up project..."
-# Check if gcloud is initiated, if not, run the first command
+echo '🐰 Setting up project in GCP ...'
+# Check if gcloud is configured, if not, then initialize
 if ! gcloud config get-value project &>/dev/null; then
     echo "🐰 Initializing gcloud... ⚡"
     gcloud init --console-only
@@ -81,11 +81,11 @@ cluster_url=$(kubectl config view -o jsonpath="{.clusters[?(@.name==\"$current_c
 certificate=$(kubectl config view --raw --minify --flatten -o jsonpath='{.clusters[].cluster.certificate-authority-data}')
 
 
-echo -e "\n🐰 Additional information:"
+echo -e "\n🐰 To connect this cluster to your Bunnyshell organization, use this information:"
 echo "🐰 GKE Cluster Name: $cluster_name"
 echo "🐰 Cluster URL: $cluster_url"
 echo "🐰 Cloud Region: $region"
-echo "🐰 Service Account ID: $service_account_name@$project_id.iam.gserviceaccount.com"
+# echo "🐰 Service Account ID: $service_account_name@$project_id.iam.gserviceaccount.com"
 echo "🐰 Project ID: $project_id"
 echo "🐰 Google Service Account Key: Copy the content of $(pwd)/gsa-key.json"
 echo "🐰 Certificate: $certificate"
