@@ -91,4 +91,8 @@ echo "🐰 Project ID: $project_id"
 echo "🐰 Google Service Account Key: Copy the content of $(pwd)/gsa-key.json"
 echo "🐰 Certificate: $certificate"
 
+echo "🐰 To manually scale you cluster run this command: "
+echo "🐰 gcloud container clusters resize ${cluster_name} --region ${region} --project  ${project_id} --node-pool default-pool --num-nodes __NODE_COUNT__"
+
 echo "🐰 Your GKE cluster is ready for action! 🚀🔧🔍"
+
